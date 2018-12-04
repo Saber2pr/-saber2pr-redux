@@ -8,16 +8,7 @@
 import * as Types from '../types/Types'
 
 export let State: Types.IState = {
-  title: { content: '' },
-  text: {
-    head: '',
-    foot: ''
-  },
-  infor: {
-    name: '',
-    message: {
-      p1: '',
-      p2: ''
-    }
+  none: {
+    value: ''
   }
 }

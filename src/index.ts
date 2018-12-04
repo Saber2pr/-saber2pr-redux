@@ -14,17 +14,7 @@ let listener = () => console.log($Store.getState())
 $Store.subscribe(listener)
 
 // 发射action
-$Store.dispatch<IAction<Actions.Title>>({
-  type: 'reduce_title',
-  value: 'hello title redux'
-})
-
-$Store.dispatch<IAction<Actions.Infor>>({
-  type: 'reduce_name',
-  value: 'hello name redux'
-})
-
-$Store.dispatch<IAction<Actions.Infor>>({
-  type: 'reduce_message_p2',
-  value: 'hello p2 redux'
+$Store.dispatch<IAction<Actions.Default>>({
+  type: 'default',
+  value: 'hello redux'
 })

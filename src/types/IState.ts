@@ -6,18 +6,7 @@
  */
 // state
 export interface IState {
-  title: {
-    content: string
-  }
-  text: {
-    head: string
-    foot: string
-  }
-  infor: {
-    name: string
-    message: {
-      p1: string
-      p2: string
-    }
+  none: {
+    value: string
   }
 }
