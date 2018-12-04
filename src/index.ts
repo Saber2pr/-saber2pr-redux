@@ -2,14 +2,19 @@
  * @Author: AK-12
  * @Date: 2018-12-03 23:25:19
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-03 23:41:00
+ * @Last Modified time: 2018-12-04 15:15:59
  */
-import { store } from './store/Store'
+import { IAction } from './types/Types'
+import { IAction_Type_Title } from './dev/Actions'
+import { $Store } from './dev/Build'
 
 // 监听回调
-let listener = () => console.log(store.getState())
+let listener = () => console.log($Store.getState())
 // 注册监听回调
-store.subscribe(listener)
+$Store.subscribe(listener)
 
 // 发射action
-store.dispatch({ type: '', value: 233 })
+$Store.dispatch<IAction<IAction_Type_Title>>({
+  type: 'sayHello',
+  value: 'hello ts'
+})
