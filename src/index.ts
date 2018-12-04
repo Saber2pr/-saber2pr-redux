@@ -12,6 +12,4 @@ let listener = () => console.log(store.getState())
 store.subscribe(listener)
 
 // 发射action
-store.dispatch({ type: 'add', value: 233 })
-store.dispatch({ type: 'update', value: 23334 })
-store.dispatch({ type: 'update', value: 0 })
+store.dispatch({ type: '', value: 233 })
