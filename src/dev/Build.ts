@@ -9,7 +9,7 @@
 import { createStore } from 'redux'
 import { combineReducers } from 'redux'
 // reducers
-import * as reducers from '../dev/Reducers'
+import * as reducers from './Reducers'
 
 // 创建store
 export let $Store = createStore(combineReducers(reducers))
