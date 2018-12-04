@@ -14,7 +14,7 @@ let listener = () => console.log($Store.getState())
 $Store.subscribe(listener)
 
 // 发射action
-$Store.dispatch<IAction<Actions.IAction_Type_Text>>({
+$Store.dispatch<IAction<Actions.Text>>({
   type: 'reduce_head',
   value: 'hello redux'
 })

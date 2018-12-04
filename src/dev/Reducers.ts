@@ -2,17 +2,17 @@
  * @Author: AK-12
  * @Date: 2018-12-03 23:38:12
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-04 15:33:56
+ * @Last Modified time: 2018-12-04 15:36:25
  * @discript: 存放reducers的空间
  */
 import * as Types from '../types/Types'
 import * as Actions from './Actions'
 import { State } from './State'
 
-// reducers
+// title reducer
 export let reducer_title: Types.IReducer<
   Types.IState['title'],
-  Types.IAction<Actions.IAction_Type_Title>
+  Types.IAction<Actions.Title>
 > = (state = State.title, action) => {
   switch (action.type) {
     case 'reduce_title':
@@ -22,10 +22,10 @@ export let reducer_title: Types.IReducer<
   }
 }
 
-// reducers
+// text reducer
 export let reducer_text: Types.IReducer<
   Types.IState['text'],
-  Types.IAction<Actions.IAction_Type_Text>
+  Types.IAction<Actions.Text>
 > = (state = State.text, action) => {
   switch (action.type) {
     case 'reduce_head':
