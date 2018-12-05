@@ -1,11 +1,23 @@
 /*
  * @Author: AK-12
- * @Date: 2018-12-04 14:46:30
+ * @Date: 2018-12-05 12:46:04
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-04 15:20:36
+ * @Last Modified time: 2018-12-05 13:15:26
  */
-// action
-export interface IAction<T, V> {
-  type: keyof T
-  value: V
+/**
+ * IAction接口
+ * 依赖：redux/Action, IAction_type
+ */
+import { Action } from 'redux'
+import { Type_default } from './IAction_type'
+/**
+ *IAction_default
+ *
+ * @export
+ * @interface IAction
+ * @extends {Action<keyof Default>}
+ */
+export interface IAction_default<T = string>
+  extends Action<keyof Type_default> {
+  value: T
 }

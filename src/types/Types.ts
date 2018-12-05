@@ -1,17 +1,9 @@
 /*
  * @Author: AK-12
- * @Date: 2018-12-04 15:21:31
+ * @Date: 2018-12-05 12:46:12
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-04 15:24:23
+ * @Last Modified time: 2018-12-05 13:16:36
  */
-import { IState } from './IState'
-import * as _IAction from './IAction'
-import * as _IReducer from './IReducers'
-// IState
-export { IState } from './IState'
-// IAction
-export interface IAction<T = 'default', V = string>
-  extends _IAction.IAction<T, V> {}
-// IReducer
-export interface IReducer<S = IState, A = IAction>
-  extends _IReducer.IReducer<S, A> {}
+export * from './IState'
+export * from './IAction'
+export * from './IReducer'

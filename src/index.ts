@@ -2,11 +2,10 @@
  * @Author: AK-12
  * @Date: 2018-12-03 23:25:19
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-04 16:36:07
+ * @Last Modified time: 2018-12-05 13:17:29
  */
-import { IAction } from './types/Types'
-import * as Actions from './dev/Actions'
 import { $Store } from './dev/Build'
+import { IAction_default } from './types/Types'
 
 // 监听回调
 let listener = () => console.log($Store.getState())
@@ -14,7 +13,7 @@ let listener = () => console.log($Store.getState())
 $Store.subscribe(listener)
 
 // 发射action
-$Store.dispatch<IAction<Actions.Default>>({
+$Store.dispatch<IAction_default>({
   type: 'default',
   value: 'hello redux'
 })
