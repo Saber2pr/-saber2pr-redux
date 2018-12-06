@@ -2,7 +2,7 @@
  * @Author: AK-12
  * @Date: 2018-12-05 12:46:07
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-05 23:31:09
+ * @Last Modified time: 2018-12-06 12:58:50
  */
 /**
  * IReducer接口
@@ -10,11 +10,8 @@
  */
 import { IState } from './IState'
 import { IAction_default } from './IAction'
-import { AnyAction } from './saber-redux'
+import { Reducer } from './saber-redux'
 
-export interface Reducer<S = any, A = AnyAction> {
-  (state: S, action: A): S
-}
 /**
  *Reducer_default
  *

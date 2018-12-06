@@ -2,7 +2,7 @@
  * @Author: AK-12
  * @Date: 2018-12-05 23:06:09
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-06 00:06:13
+ * @Last Modified time: 2018-12-06 14:02:34
  */
 /**
  *Action
@@ -49,25 +49,16 @@ export interface Dispatch<A extends Action = AnyAction> {
  *
  * @interface Listener
  */
-export interface Listener {
-  (): void
+export interface Listener<S> {
+  (state: S): void
 }
 /**
  *Subscribe
  *
  * @interface Subscribe
  */
-export interface Subscribe {
-  (listener: Listener): Listener
-}
-/**
- *IStore
- *
- * @interface IStore
- * @template S
- */
-export interface IStore<S> {
-  new (reducer: Reducer, state: S): Store<S>
+export interface Subscribe<S> {
+  (listener: Listener<S>): Listener<S>
 }
 /**
  *Store
@@ -76,7 +67,7 @@ export interface IStore<S> {
  * @class Store
  * @template S
  */
-class Store<S> {
+class Store<S = any, A extends Action = AnyAction> {
   /**
    *state
    *
@@ -92,7 +83,7 @@ class Store<S> {
    * @type {Array<Listener>}
    * @memberof Store
    */
-  private listeners: Array<Listener>
+  private listeners: Listener<S>[] = []
   /**
    *Creates an instance of Store.
    * @param {Reducer} reducer
@@ -101,7 +92,6 @@ class Store<S> {
    */
   public constructor(private reducer: Reducer, state: S) {
     this.state = state
-    this.listeners = new Array<Listener>()
   }
   /**
    *dispatch
@@ -109,8 +99,11 @@ class Store<S> {
    * @type {Dispatch}
    * @memberof Store
    */
-  public dispatch: Dispatch = action =>
-    (this.state = this.reducer(this.state, action))
+  public dispatch: Dispatch<A> = action => {
+    this.state = this.reducer(this.state, action)
+    this.listeners.forEach(l => l(this.state))
+    return action
+  }
   /**
    *getState
    *
@@ -126,25 +119,17 @@ class Store<S> {
    * @type {Subscribe}
    * @memberof Store
    */
-  public subscribe: Subscribe = listener => {
+  public subscribe: Subscribe<S> = listener => {
     this.listeners.push(listener)
     return () => this.listeners.filter(l => l !== listener)
   }
 }
 /**
- * create
- * @param Store
- * @param reducer
- * @param state
- */
-let create = <S>(Store: IStore<S>, reducer: Reducer, state: S): Store<S> =>
-  new Store(reducer, state)
-/**
  * createStore
  * @param reducer
  */
 export let createStore = <S>(reducer: Reducer<S>) =>
-  create<S>(Store, reducer, reducer())
+  new Store(reducer, reducer())
 /**
  *ReducersMapObject
  *
@@ -157,29 +142,19 @@ export type ReducersMapObject<S = any, A extends Action = Action> = {
   [K in keyof S]: Reducer<S[K], A>
 }
 /**
- *combineReducers
- *
- * @export
- * @interface combineReducers
- * @template S
- */
-export interface combineReducers<S> {
-  (reducers: ReducersMapObject<S, any>): Reducer<S>
-}
-export interface combineReducers<S, A extends Action = AnyAction> {
-  (reducers: ReducersMapObject<S, A>): Reducer<S, A>
-}
-/**
  * combineReducers
  * @param reducers
  */
 export const combineReducers = <S, A extends Action = AnyAction>(
-  reducers: ReducersMapObject<S, any>
+  reducers: ReducersMapObject<S, A>
 ) => {
-  return (state: S, action: A) => {
-    return Object.keys(reducers).reduce<S>((nextState, key) => {
-      nextState[key] = reducers[key](state[key], action)
-      return nextState
-    }, null)
+  return (state: S = {} as S, action: A) => {
+    return Object.keys(reducers).reduce<S>(
+      (nextState, key) => {
+        nextState[key] = reducers[key](state[key], action)
+        return nextState
+      },
+      {} as S
+    )
   }
 }
