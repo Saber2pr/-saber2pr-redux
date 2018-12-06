@@ -2,7 +2,7 @@
  * @Author: AK-12
  * @Date: 2018-12-05 23:06:09
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-06 14:02:34
+ * @Last Modified time: 2018-12-06 14:05:39
  */
 /**
  *Action
@@ -13,6 +13,18 @@
  */
 export interface Action<T = any> {
   type: T
+}
+/**
+ *ActionBy
+ *
+ * @export
+ * @interface ActionBy
+ * @extends {Action<keyof T>}
+ * @template T
+ * @template V
+ */
+export interface ActionBy<T, V = string> extends Action<keyof T> {
+  value: V
 }
 /**
  *AnyAction
