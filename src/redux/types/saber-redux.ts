@@ -2,7 +2,7 @@
  * @Author: AK-12
  * @Date: 2018-12-05 23:06:09
  * @Last Modified by: AK-12
- * @Last Modified time: 2018-12-06 14:05:39
+ * @Last Modified time: 2018-12-06 14:14:00
  */
 /**
  *Action
@@ -50,6 +50,7 @@ export interface Reducer<S = any, A extends Action = AnyAction> {
 /**
  *Dispatch
  *
+ * @export
  * @interface Dispatch
  * @template A
  */
@@ -59,7 +60,9 @@ export interface Dispatch<A extends Action = AnyAction> {
 /**
  *Listener
  *
+ * @export
  * @interface Listener
+ * @template S
  */
 export interface Listener<S> {
   (state: S): void
@@ -67,7 +70,9 @@ export interface Listener<S> {
 /**
  *Subscribe
  *
+ * @export
  * @interface Subscribe
+ * @template S
  */
 export interface Subscribe<S> {
   (listener: Listener<S>): Listener<S>
@@ -75,9 +80,9 @@ export interface Subscribe<S> {
 /**
  *Store
  *
- * @export
  * @class Store
  * @template S
+ * @template A
  */
 class Store<S = any, A extends Action = AnyAction> {
   /**
@@ -92,7 +97,7 @@ class Store<S = any, A extends Action = AnyAction> {
    *listeners
    *
    * @private
-   * @type {Array<Listener>}
+   * @type {Listener<S>[]}
    * @memberof Store
    */
   private listeners: Listener<S>[] = []
@@ -108,7 +113,7 @@ class Store<S = any, A extends Action = AnyAction> {
   /**
    *dispatch
    *
-   * @type {Dispatch}
+   * @type {Dispatch<A>}
    * @memberof Store
    */
   public dispatch: Dispatch<A> = action => {
@@ -128,7 +133,7 @@ class Store<S = any, A extends Action = AnyAction> {
   /**
    *subscribe
    *
-   * @type {Subscribe}
+   * @type {Subscribe<S>}
    * @memberof Store
    */
   public subscribe: Subscribe<S> = listener => {
