@@ -1,6 +1,6 @@
 {
   "name": "saber-redux",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Simplify of Redux in Typescript.",
   "repository": {
     "type": "git",
