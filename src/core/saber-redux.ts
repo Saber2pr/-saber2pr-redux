@@ -68,6 +68,10 @@ export interface AnyAction extends Action {
 export interface Reducer<S = any, A extends Action = AnyAction> {
   (state?: S | undefined, action?: A): S
 }
+export type IAction<S, T extends keyof S> = ActionV<T, S[T]>
+export type IActions<S> = { [K in keyof S]: IAction<S, K> }
+export type IReducer<S, T extends keyof S> = Reducer<S[T], IAction<S, T>>
+export type IReducers<S> = { [K in keyof S]: IReducer<S, K> }
 /**
  *Dispatch
  *
