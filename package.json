@@ -1,13 +1,21 @@
 {
-  "name": "saber-redux",
-  "version": "1.2.6",
+  "name": "@saber2pr/redux",
+  "version": "0.0.1",
   "description": "Simplify of Redux in Typescript.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saber2pr/saber-redux.git"
+    "url": "git+https://github.com/Saber2pr/-saber2pr-redux.git"
   },
   "author": "saber2pr",
   "license": "ISC",
+  "files": [
+    "lib/core/*",
+    "lib/index.*"
+  ],
+  "keywords": [
+    "redux",
+    "typescript"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "test": "node ./lib/test/test.js",
