@@ -19,7 +19,7 @@ export interface Reducer<S, A extends Action = AnyAction> {
 export class Store<S, A extends Action = AnyAction> {
   public constructor(
     private reducer: Reducer<S, A>,
-    private state: S,
+    private state: S = {} as S,
     private listeners: (() => void)[] = []
   ) {}
 
@@ -39,7 +39,7 @@ export class Store<S, A extends Action = AnyAction> {
   }
 }
 
-export const createStore = <S>(reducer: Reducer<S>, state: S) =>
+export const createStore = <S>(reducer: Reducer<S>, state?: S) =>
   new Store<S>(reducer, state)
 
 export type ReducersMapObject<S, A extends Action = AnyAction> = {
@@ -49,8 +49,10 @@ export type ReducersMapObject<S, A extends Action = AnyAction> = {
 export const combineReducers = <S, A extends Action = AnyAction>(
   reducers: ReducersMapObject<S, A>
 ) => (state: S, action: A) =>
-  Object.keys(reducers).reduce(
+  (Object.keys(reducers) as (keyof S)[]).reduce(
     (nextState, key) =>
-      Object.assign(nextState, { [key]: reducers[key](state[key], action) }),
-    state
+      Object.assign(nextState, {
+        [key]: reducers[key](state[key], action)
+      }),
+    {} as S
   )
