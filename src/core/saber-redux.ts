@@ -16,14 +16,12 @@ export interface Reducer<S, A extends Action = AnyAction> {
   (state: S, action: A): S
 }
 
-export class Store<S, A extends Action = AnyAction> {
-  public constructor(
-    private reducer: Reducer<S, A>,
-    private state: S = {} as S,
-    private listeners: (() => void)[] = []
-  ) {}
+export class Store<S> {
+  public constructor(private reducer: Reducer<S>, private state: S = {} as S) {}
 
-  public dispatch(action: A) {
+  private listeners: (() => void)[] = []
+
+  public dispatch<A extends Action>(action: A) {
     this.state = this.reducer(this.state, action)
     this.listeners.forEach(l => l())
     return action
