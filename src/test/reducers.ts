@@ -1,5 +1,5 @@
 import { IState } from './state'
-import { Action, Reducer } from '../core/saber-redux'
+import { Action, Reducer } from '..'
 
 type MyAction<T> = Action & { payload: T }
 

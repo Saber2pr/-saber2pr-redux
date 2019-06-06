@@ -1,3 +1,9 @@
+/*
+ * @Author: saber2pr
+ * @Date: 2019-06-06 20:01:47
+ * @Last Modified by:   saber2pr
+ * @Last Modified time: 2019-06-06 20:01:47
+ */
 export function compose<T>(...funcs: ((...args: T[]) => T)[]) {
   if (funcs.length === 0) {
     return (arg: T) => arg
