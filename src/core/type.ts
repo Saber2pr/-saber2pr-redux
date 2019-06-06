@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-06-06 20:01:03
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-06 21:00:35
+ * @Last Modified time: 2019-06-06 21:11:48
  */
 export interface Action<T = any> {
   type: T
@@ -36,7 +36,3 @@ export type Middleware = <S>(
 export type ApplyMiddleware = <S>(
   ...middlewares: Middleware[]
 ) => (store: MiddlewareAPI<S>) => MiddlewareAPI<S>
-
-export type Thunk = <S>(
-  api: MiddlewareAPI<S>
-) => (next: MiddlewareAPI<S>['dispatch']) => MiddlewareAPI<S>['dispatch']
