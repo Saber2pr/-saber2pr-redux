@@ -9,14 +9,10 @@ import { Store } from './store'
 import { applyMiddleware } from './applyMiddleware'
 import { thunk } from './thunk'
 
-export const createStore = <S>(
+export function createStore<S>(
   reducer: Reducer<S>,
   state: S,
   ...middlewares: Middleware[]
-) => {
-  const store = applyMiddleware<S>(thunk)(new Store<S>(reducer, state))
-
-  if (middlewares) return applyMiddleware<S>(...middlewares)(store)
-
-  return store
+) {
+  return applyMiddleware<S>(thunk, ...middlewares)(new Store<S>(reducer, state))
 }
