@@ -15,23 +15,30 @@ git clone https://github.com/Saber2pr/-saber2pr-redux.git
 # API
 
 ```ts
+type A = {
+  type: string
+  payload: number
+}
+
 const store = createStore(combineReducers(reducers), State)
 
 console.log(store.getState())
 store.subscribe(() => console.log(store.getState()))
 
-store.dispatch(({ dispatch }) => {
+const AsyAct: AsyncAction = ({ dispatch }) => {
   setTimeout(
     () =>
-      dispatch({
+      dispatch<A>({
         type: 'index',
         payload: 233
       }),
     1000
   )
-})
+}
 
-store.dispatch({
+store.dispatch(AsyAct)
+
+store.dispatch<A>({
   type: 'index',
   payload: 233
 })
