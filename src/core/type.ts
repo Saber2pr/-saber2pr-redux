@@ -9,7 +9,7 @@ export interface Action<T = any> {
 }
 
 export interface AsyncAction<S = {}> {
-  (api: IStore<S>): void
+  (api: MiddlewareAPI<S>): void
 }
 
 export interface AnyAction extends Action {
@@ -24,7 +24,7 @@ export type ReducersMapObject<S, A extends Action = AnyAction> = {
   [K in keyof S]: Reducer<S[K], A>
 }
 
-export interface IStore<S> {
+export interface MiddlewareAPI<S> {
   dispatch<A extends AnyAction>(action: A): A
   dispatch(action: AsyncAction<S>): void
 
@@ -34,9 +34,9 @@ export interface IStore<S> {
 }
 
 export type Middleware = <S>(
-  api: IStore<S>
-) => (next: IStore<S>['dispatch']) => IStore<S>['dispatch']
+  api: MiddlewareAPI<S>
+) => (next: MiddlewareAPI<S>['dispatch']) => MiddlewareAPI<S>['dispatch']
 
 export type ApplyMiddleware = <S>(
   ...middlewares: Middleware[]
-) => (store: IStore<S>) => IStore<S>
+) => (store: MiddlewareAPI<S>) => MiddlewareAPI<S>

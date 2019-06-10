@@ -14,5 +14,7 @@ export function createStore<S>(
   state: S,
   ...middlewares: Middleware[]
 ) {
-  return applyMiddleware<S>(thunk, ...middlewares)(new Store<S>(reducer, state))
+  return applyMiddleware<S>(thunk, ...middlewares)(
+    new Store<S>(reducer, state)
+  ) as Store<S>
 }
