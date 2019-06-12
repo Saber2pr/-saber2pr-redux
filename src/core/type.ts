@@ -9,7 +9,7 @@ export interface Action<T = any> {
 }
 
 export interface AsyncAction<S = {}, R = void> {
-  (api: MiddlewareAPI<S>): Promise<R>
+  (api: MiddlewareAPI<S>): R
 }
 
 export interface AnyAction extends Action {
@@ -26,7 +26,7 @@ export type ReducersMapObject<S, A extends Action = AnyAction> = {
 
 export interface MiddlewareAPI<S> {
   dispatch<A extends AnyAction>(action: A): A
-  dispatch<R>(action: AsyncAction<S, R>): Promise<R>
+  dispatch<R>(action: AsyncAction<S, R>): R
 
   getState(): S
 

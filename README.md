@@ -4,6 +4,21 @@
 
 > 内置支持 thunk.
 
+## Idea
+
+没有 reducers 的 redux 了解下?
+快速创建一个可观测 state 对象
+
+```ts
+const state = createState({ age: 0 })
+
+state.subscribe(() => console.log(state.getState().age))
+
+state.dispatch((dispatch, getState) =>
+  setTimeout(() => dispatch('age', getState().age + 1))
+)
+```
+
 ```bash
 # from npm
 npm install @saber2pr/redux
