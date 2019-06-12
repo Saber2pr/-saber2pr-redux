@@ -1,24 +1,24 @@
+import { A } from './action'
+import { Reducer } from '../core'
 import { IState } from './state'
-import { Action, Reducer } from '..'
 
-type MyAction<T> = Action & { payload: T }
-
-export const index: Reducer<IState['index']> = (
-  state: IState['index'],
-  action: MyAction<number>
-) => {
+export const month: Reducer<IState['month'], A.month> = (state, action) => {
   switch (action.type) {
-    case 'index':
+    case 'addMonth':
       return state + action.payload
+    case 'subMonth':
+      return state - action.payload
     default:
       return state
   }
 }
 
-export const state = (state: IState['state'], action: MyAction<string>) => {
+export const day: Reducer<IState['day'], A.day> = (state, action) => {
   switch (action.type) {
-    case 'state':
-      return action.payload
+    case 'addDay':
+      return state + action.payload
+    case 'subDay':
+      return state - action.payload
     default:
       return state
   }

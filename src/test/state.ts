@@ -1,6 +1,9 @@
-export const State = {
-  index: 1,
-  state: 'out'
+export interface IState {
+  month: number
+  day: number
 }
 
-export type IState = typeof State
+export const State: IState = {
+  month: 1,
+  day: 1
+}

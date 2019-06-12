@@ -8,8 +8,8 @@ export interface Action<T = any> {
   type: T
 }
 
-export interface AsyncAction<S = {}> {
-  (api: MiddlewareAPI<S>): void
+export interface AsyncAction<S = {}, R = void> {
+  (api: MiddlewareAPI<S>): Promise<R>
 }
 
 export interface AnyAction extends Action {
@@ -26,7 +26,7 @@ export type ReducersMapObject<S, A extends Action = AnyAction> = {
 
 export interface MiddlewareAPI<S> {
   dispatch<A extends AnyAction>(action: A): A
-  dispatch(action: AsyncAction<S>): void
+  dispatch<R>(action: AsyncAction<S, R>): Promise<R>
 
   getState(): S
 

@@ -1,32 +1,38 @@
-import { createStore, combineReducers } from '..'
-import * as reducers from './reducers'
-import { State } from './state'
-import { AsyncAction } from '..'
-
-type A = {
-  type: string
-  payload: number
-}
-
-const store = createStore(combineReducers(reducers), State)
+import { store } from './store'
+import { A } from './action'
+import { compose } from '../core'
 
 console.log(store.getState())
 store.subscribe(() => console.log(store.getState()))
 
-const AsyAct: AsyncAction = ({ dispatch }) => {
-  setTimeout(
-    () =>
-      dispatch<A>({
-        type: 'index',
-        payload: 233
-      }),
-    1000
-  )
+const delay = (time: number) => new Promise(res => setTimeout(res, time))
+
+store
+  .dispatch(async ({ dispatch }) => {
+    await delay(1000)
+    return dispatch({
+      type: 'addMonth',
+      payload: 1
+    })
+  })
+  .then(a => console.log(a))
+
+store.dispatch<A.day>({
+  type: 'addDay',
+  payload: 1
+})
+
+function test1(a: number) {
+  return a + 1
 }
 
-store.dispatch(AsyAct)
+function test2(a: number) {
+  return a + 100
+}
 
-store.dispatch<A>({
-  type: 'index',
-  payload: 233
-})
+console.log(
+  compose(
+    test1,
+    test2
+  )(1)
+)
