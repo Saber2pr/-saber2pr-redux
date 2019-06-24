@@ -10,6 +10,8 @@
 快速创建一个可观测 state 对象
 
 ```ts
+import { createState } from '@saber2pr/redux/lib/state'
+
 const state = createState({ age: 0 })
 
 state.subscribe(() => console.log(state.getState().age))

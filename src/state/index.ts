@@ -4,10 +4,9 @@
  * @Last Modified by:   saber2pr
  * @Last Modified time: 2019-06-12 19:23:29
  */
+export type AsyncAction<R, S> = (dispatch: Dispatch<S>, getState: () => S) => R
 
-type AsyncAction<R, S> = (dispatch: Dispatch<S>, getState: () => S) => R
-
-interface Dispatch<S> {
+export interface Dispatch<S> {
   <R>(asyncAction: AsyncAction<R, S>): R
   <K extends keyof S>(type: K, payload: S[K]): S[K]
 }

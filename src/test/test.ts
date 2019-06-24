@@ -1,6 +1,7 @@
 import { store } from './store'
 import { A } from './action'
-import { compose, createState } from '..'
+import { compose } from '..'
+import { createState } from '../state'
 
 // console.log(store.getState())
 // store.subscribe(() => console.log(store.getState()))
@@ -40,10 +41,21 @@ import { compose, createState } from '..'
 //   )(1)
 // )
 
-const state = createState({ age: 0 })
+const state = createState({ count: 0 })
 
-state.subscribe(() => console.log(state.getState().age))
+state.subscribe(() => console.log(state.getState().count))
+
+state.dispatch('count', 1)
 
 state.dispatch((dispatch, getState) =>
-  setTimeout(() => dispatch('age', getState().age + 1))
+  setTimeout(() => dispatch('count', getState().count + 1))
 )
+
+const delay = (time: number) => new Promise(res => setTimeout(res, time))
+
+state.dispatch(async (dispatch, getState) => {
+  await delay(500)
+  setTimeout(() => dispatch('count', getState().count + 1))
+
+  return { count: getState().count }
+})

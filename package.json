@@ -1,6 +1,6 @@
 {
   "name": "@saber2pr/redux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simplify of Redux in Typescript.",
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "files": [
     "lib/core/*",
+    "lib/state/*",
     "lib/index.*"
   ],
   "keywords": [
